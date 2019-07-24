@@ -24,7 +24,7 @@ final class Writer implements WriterInterface, FromHtmlWriterInterface
 
     /**
      * @param string $html
-     * @return void
+     * @throws MpdfException
      */
     public function setSourceHtml($html)
     {
@@ -52,6 +52,7 @@ final class Writer implements WriterInterface, FromHtmlWriterInterface
      */
     public function render(array $options = [])
     {
+
         if ($this->source === null) {
             throw new MissingSourceException('Source HTML string not provided');
         }
@@ -59,7 +60,8 @@ final class Writer implements WriterInterface, FromHtmlWriterInterface
             throw new InvalidOutputException('Could not open target stream.');
         }
         try {
-            $binary = $this->mpdf->Output($this->source);
+            $this->mpdf->WriteHTML($this->source);
+            $binary = $this->mpdf->Output('','S');
         } catch (MpdfException $e) {
             throw new RenderException('Failed generating PDF: ' . $e->getMessage(), $e->getCode(), $e);
         }
