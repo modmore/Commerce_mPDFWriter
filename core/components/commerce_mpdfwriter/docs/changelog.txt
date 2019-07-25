@@ -1,5 +1,5 @@
-mPDF Writer for Commerce 1.0.0-rc1
+mPDF Writer for Commerce 1.0.0-pl
 ----------------------------------
 Released on 25 July, 2019
 
-- Release candidate for Commerce_mPDFWriter
+- First release of the mPDF Writer for Commerce. Developed by Murray Wood for modmore.
