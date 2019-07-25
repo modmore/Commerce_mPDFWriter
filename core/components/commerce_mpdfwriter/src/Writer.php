@@ -52,7 +52,6 @@ final class Writer implements WriterInterface, FromHtmlWriterInterface
      */
     public function render(array $options = [])
     {
-
         if ($this->source === null) {
             throw new MissingSourceException('Source HTML string not provided');
         }

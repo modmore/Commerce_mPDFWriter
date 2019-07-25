@@ -33,17 +33,6 @@ class mPDFWriter extends BaseModule {
 
         // Load PDF Writer
         $dispatcher->addListener(\Commerce::EVENT_GET_PDF_WRITER, array($this, 'getPDFWriter'));
-
-        // Add the xPDO package, so Commerce can detect the derivative classes
-//        $root = dirname(dirname(__DIR__));
-//        $path = $root . '/model/';
-//        $this->adapter->loadPackage('commerce_mpdfwriter', $path);
-
-        // Add template path to twig
-//        /** @var ChainLoader $loader */
-//        $root = dirname(dirname(__DIR__));
-//        $loader = $this->commerce->twig->getLoader();
-//        $loader->addLoader(new FilesystemLoader($root . '/templates/'));
     }
 
     public function getPDFWriter(PDFWriter $event)
