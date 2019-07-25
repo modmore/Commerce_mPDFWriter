@@ -3,10 +3,10 @@ mPDF Writer for Commerce
 
 Introduction
 --
-mPDF Writer is an optional module for the Commerce platform by Modmore https://www.modmore.com which runs on the MODX Content Management System.
+mPDF Writer is an optional module for the Commerce platform by [modmore](https://www.modmore.com) which runs on the MODX Content Management System.
 mPDF Writer adds a PDF output option that Commerce can use to generate PDFs (like invoices), based on the [mPDF 8.x library](https://mpdf.github.io/).
 
-Before the creation of this module, the only other existing option to generate PDF invoices within Commerce was the PDFCrowd Writer (https://www.modmore.com/commerce/extensions/pdfcrowd-writer/) which is excellent but requires an account to access the PDFCrowd API.
+Before the creation of this module, the only other existing option to generate PDF invoices within Commerce was the [PDFCrowd Writer](https://www.modmore.com/commerce/extensions/pdfcrowd-writer/) which is excellent but requires an account to access the PDFCrowd API.
 mPDF allows for free PDF generation under the GPL2.0 license.
 
 Requirements
