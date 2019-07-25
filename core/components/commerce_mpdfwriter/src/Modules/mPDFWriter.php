@@ -1,8 +1,7 @@
 <?php
 namespace modmore\Commerce_mPDFWriter\Modules;
-use modmore\Commerce\Modules\BaseModule;
-use modmore\Commerce\Admin\Widgets\Form\DescriptionField;
 use modmore\Commerce\Events\PDFWriter;
+use modmore\Commerce\Modules\BaseModule;
 use modmore\Commerce_mPDFWriter\Writer;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 
@@ -24,7 +23,7 @@ class mPDFWriter extends BaseModule {
 
     public function getDescription()
     {
-        return $this->adapter->lexicon('commerce_mpdfwriter.description');
+        return $this->adapter->lexicon('commerce_mpdfwriter.module_description');
     }
 
     public function initialize(EventDispatcher $dispatcher)
@@ -55,12 +54,6 @@ class mPDFWriter extends BaseModule {
 
     public function getModuleConfiguration(\comModule $module)
     {
-        $fields = [];
-
-        $fields[] = new DescriptionField($this->commerce, [
-            'description' => $this->adapter->lexicon('commerce_mpdfwriter.module_description'),
-        ]);
-
-        return $fields;
+        return [];
     }
 }
