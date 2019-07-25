@@ -18,7 +18,7 @@ class mPDFWriter extends BaseModule {
 
     public function getAuthor()
     {
-        return 'Murray Wood';
+        return 'modmore';
     }
 
     public function getDescription()

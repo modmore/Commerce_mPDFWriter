@@ -9,6 +9,8 @@ mPDF Writer adds a PDF output option that Commerce can use to generate PDFs (lik
 Before the creation of this module, the only other existing option to generate PDF invoices within Commerce was the PDFCrowd Writer (https://www.modmore.com/commerce/extensions/pdfcrowd-writer/) which is excellent but requires an account to access the PDFCrowd API.
 mPDF allows for free PDF generation under the GPL2.0 license.
 
+Developed by Murray Wood for modmore.
+
 Requirements
 ------------
 mPDF Writer requires Commerce 1.0 or above.
