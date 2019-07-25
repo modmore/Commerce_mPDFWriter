@@ -1,8 +1,8 @@
 <?php
 
 return [
-//    'some_setting' => [
-//        'area' => 'general',
-//        'value' => 'some_value',
-//    ],
+    'commerce_mpdfwriter.core_path' => [
+        'area' => 'Paths',
+        'value' => '{core_path}components/commerce_mpdfwriter/',
+    ],
 ];
