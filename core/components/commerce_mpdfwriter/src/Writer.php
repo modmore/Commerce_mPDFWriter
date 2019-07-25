@@ -24,7 +24,7 @@ final class Writer implements WriterInterface, FromHtmlWriterInterface
 
     /**
      * @param string $html
-     * @throws MpdfException
+     * @return void
      */
     public function setSourceHtml($html)
     {

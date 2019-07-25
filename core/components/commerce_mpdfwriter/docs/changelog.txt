@@ -1,4 +1,4 @@
-++ Mpdfwriter for Commerce 0.1.0-pl
-++ Released on
+++ Mpdfwriter for Commerce 1.0.0-rc1
+++ Released on 25 July, 2019
 ++++++++++++++++++++++++++
-- First release
+- Release candidate for Commerce_mPDFWriter
