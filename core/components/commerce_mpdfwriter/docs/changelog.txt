@@ -1,3 +1,9 @@
+mPDF Writer for Commerce 1.0.1-pl
+----------------------------------
+Released on 28 July, 2019
+
+- Fix module not being recognised after installation
+
 mPDF Writer for Commerce 1.0.0-pl
 ----------------------------------
 Released on 25 July, 2019
