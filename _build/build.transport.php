@@ -13,6 +13,35 @@ function getSnippetContent($filename = '') {
     return $o;
 }
 
+/**
+ * Empties a folder. Used in our case for removing unneeded fonts to reduce package size.
+ * Based on a PR by @jako to the Git Package Management (GPM) tool for MODX.
+ * https://github.com/theboxer/Git-Package-Management/pull/112
+ * @param $path
+ * @param string $filemask
+ */
+function emptyFolder($path, $filemask = '*') {
+    $inverse = false;
+    if (strpos($filemask, '!') === 0) {
+        $filemask = substr($filemask, 1);
+        $inverse = true;
+    }
+    $files = glob($path . '/' . $filemask, GLOB_BRACE);
+    if ($inverse) {
+        $allFiles = glob($path . '/*');
+        $files = array_diff($allFiles, $files);
+    }
+    foreach ($files as $file) {
+        if (is_dir($file)) {
+            emptyFolder($file, '*');
+            rmdir($file);
+        } else {
+            unlink($file);
+        }
+    }
+    return;
+}
+
 $mtime = microtime();
 $mtime = explode(" ", $mtime);
 $mtime = $mtime[1] + $mtime[0];
@@ -23,7 +52,7 @@ if (!defined('MOREPROVIDER_BUILD')) {
     /* define version */
     define('PKG_NAME', 'Commerce_mPDFWriter');
     define('PKG_NAMESPACE', 'commerce_mpdfwriter');
-    define('PKG_VERSION', '1.0.0');
+    define('PKG_VERSION', '1.0.2');
     define('PKG_RELEASE', 'pl');
 
     /* load modx */
@@ -101,6 +130,19 @@ $builder->setPackageAttributes(array(
 ));
 $modx->log(modX::LOG_LEVEL_INFO,'Packaged in package attributes.'); flush();
 
+/* Specify directories to empty (mainly large fonts) */
+$emptyFolders = [
+    $sources['source_core'].'/vendor/mpdf/mpdf/tmp' => "*",
+    $sources['source_core'].'/vendor/mpdf/mpdf/ttfonts' => "!{DejaVu*,Free*}",
+    $sources['source_core'].'/vendor/mpdf/mpdf/ttfontdata' => "*"
+];
+if (!empty($emptyFolders)) {
+    foreach ($emptyFolders as $emptyFolder => $emptyFiles) {
+        emptyFolder($emptyFolder, $emptyFiles);
+    }
+    $modx->log(modX::LOG_LEVEL_INFO,'Removed unused fonts from mPDF.'); flush();
+}
+
 $modx->log(modX::LOG_LEVEL_INFO,'Packing...'); flush();
 $builder->pack();
 
@@ -112,4 +154,3 @@ $totalTime = ($tend - $tstart);
 $totalTime = sprintf("%2.4f s", $totalTime);
 
 $modx->log(modX::LOG_LEVEL_INFO,"\n<br />Package Built.<br />\nExecution time: {$totalTime}\n");
-
