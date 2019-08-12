@@ -1,8 +1,8 @@
-mPDF Writer for Commerce 1.0.2-pl
+mPDF Writer for Commerce 1.1.0-pl
 ----------------------------------
-Released on 03 August, 2019
+Released on 12 August, 2019
 
-- Remove unused mPDF fonts during package build to greatly reduce package size.
+- Remove unused mPDF fonts during package build to greatly reduce package size. To add new fonts, see: https://docs.modmore.com/en/Commerce/v1/Modules/mPDFWriter.html
 
 mPDF Writer for Commerce 1.0.1-pl
 ----------------------------------
