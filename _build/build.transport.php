@@ -98,6 +98,17 @@ $builder->registerNamespace(PKG_NAMESPACE,false,true,'{core_path}components/'.PK
 
 $modx->log(modX::LOG_LEVEL_INFO,'Packaged in namespace.'); flush();
 
+/* Specify directories to empty (mainly large fonts) */
+$emptyFolders = [
+    $sources['source_core'].'/vendor/mpdf/mpdf/tmp' => "*",
+    $sources['source_core'].'/vendor/mpdf/mpdf/ttfonts' => "!{DejaVu*,Free*}",
+    $sources['source_core'].'/vendor/mpdf/mpdf/ttfontdata' => "*"
+];
+foreach ($emptyFolders as $emptyFolder => $emptyFiles) {
+    emptyFolder($emptyFolder, $emptyFiles);
+}
+$modx->log(modX::LOG_LEVEL_INFO,'Removed unused fonts from mPDF.'); flush();
+
 $builder->package->put(
     [
         'source' => $sources['source_core'],
@@ -129,19 +140,6 @@ $builder->setPackageAttributes(array(
     'changelog' => file_get_contents($sources['docs'] . 'changelog.txt'),
 ));
 $modx->log(modX::LOG_LEVEL_INFO,'Packaged in package attributes.'); flush();
-
-/* Specify directories to empty (mainly large fonts) */
-$emptyFolders = [
-    $sources['source_core'].'/vendor/mpdf/mpdf/tmp' => "*",
-    $sources['source_core'].'/vendor/mpdf/mpdf/ttfonts' => "!{DejaVu*,Free*}",
-    $sources['source_core'].'/vendor/mpdf/mpdf/ttfontdata' => "*"
-];
-if (!empty($emptyFolders)) {
-    foreach ($emptyFolders as $emptyFolder => $emptyFiles) {
-        emptyFolder($emptyFolder, $emptyFiles);
-    }
-    $modx->log(modX::LOG_LEVEL_INFO,'Removed unused fonts from mPDF.'); flush();
-}
 
 $modx->log(modX::LOG_LEVEL_INFO,'Packing...'); flush();
 $builder->pack();
