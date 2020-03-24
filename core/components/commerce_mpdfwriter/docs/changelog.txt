@@ -3,6 +3,7 @@ mPDF Writer for Commerce 1.1.1-pl
 Released on 2020-03-24
 
 - Provide mPDF with a consistent base path (root of the MODX installation) to ensure relative image urls resolve consistently [S22301]
+- Relax minimum PHP version requirement to 7.1+
 
 mPDF Writer for Commerce 1.1.0-pl
 ----------------------------------
