@@ -52,6 +52,13 @@ final class Writer implements WriterInterface, FromHtmlWriterInterface
      */
     public function render(array $options = [])
     {
+        // Set the base path to the root of the site for relative image/asset URLs.
+        // While the docs at  https://mpdf.github.io/reference/mpdf-functions/setbasepath.html don't mention the ability
+        // to provide a server path, like we're doing here, it seems to work most reliably.
+        // Internally mpdf fetches with fopen/file_get_contents, so this works a treat
+        $this->mpdf->SetBasePath(MODX_BASE_PATH);
+
+        // Make sure we have a valid objective
         if ($this->source === null) {
             throw new MissingSourceException('Source HTML string not provided');
         }

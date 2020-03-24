@@ -47,7 +47,7 @@ class mPDFWriter extends BaseModule {
 
     public function addLibrariesToAbout(PageEvent $event)
     {
-        $lockFile = dirname(dirname(__DIR__)) . '/composer.lock';
+        $lockFile = dirname(__DIR__, 2) . '/composer.lock';
         if (file_exists($lockFile)) {
             $section = new SimpleSection($this->commerce);
             $section->addWidget(new ComposerPackages($this->commerce, [
