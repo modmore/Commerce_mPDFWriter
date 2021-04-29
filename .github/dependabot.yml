@@ -1,0 +1,7 @@
+version: 2
+updates:
+- package-ecosystem: composer
+  directory: "/core/components/commerce_mpdfwriter"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
