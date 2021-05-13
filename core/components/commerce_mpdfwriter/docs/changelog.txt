@@ -1,3 +1,16 @@
+mPDF Writer for Commerce 1.1.2-pl
+----------------------------------
+Released on 2021-05-13
+
+- Change gitignore strategy to allow vendor folder to be committed on installed sites
+- Updated dependencies:
+    - mpdf/mpdf updated from v8.0.5 to v8.0.11
+    - setasign/fpdi updated from v2.3.2 to v2.3.6
+    - psr/log updated from 1.1.3 to 1.1.4
+    - paragonie/random_compat updated from v9.99.99 to v9.99.100
+    - myclabs/deep-copy updated from 1.9.5 to 1.10.2
+
+
 mPDF Writer for Commerce 1.1.1-pl
 ----------------------------------
 Released on 2020-03-24

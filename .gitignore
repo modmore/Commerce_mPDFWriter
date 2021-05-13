@@ -8,6 +8,7 @@ config.core.php
 _packages/*.*
 !_packages/.gitignore
 !_packages/*.zip
+core/components/commerce_mpdfwriter/vendor
 
 # IDE files #
 #############
