@@ -1,6 +1,6 @@
 mPDF Writer for Commerce 1.1.4-pl
 ----------------------------------
-Released on 2021-07-26
+Released on 2022-10-04
 
 Dependency updates:
 
