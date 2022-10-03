@@ -67,7 +67,7 @@ final class Writer implements WriterInterface, FromHtmlWriterInterface
         }
         try {
             $this->mpdf->WriteHTML($this->source);
-            $binary = $this->mpdf->Output('','S');
+            $binary = $this->mpdf->OutputBinaryData();
         } catch (MpdfException $e) {
             throw new RenderException('Failed generating PDF: ' . $e->getMessage(), $e->getCode(), $e);
         }
