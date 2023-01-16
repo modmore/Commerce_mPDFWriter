@@ -6,7 +6,7 @@ use modmore\Commerce\Events\PDFWriter;
 use modmore\Commerce\PDF\Writer\WriterInterface;
 use modmore\Commerce_mPDFWriter\Modules\mPDFWriter;
 use modmore\Commerce_mPDFWriter\Writer;
-use Symfony\Component\EventDispatcher\EventDispatcher;
+use modmore\Commerce\Dispatcher\EventDispatcher;
 
 class mPDFWriterTest extends \PHPUnit_Framework_TestCase
 {
