@@ -10,17 +10,12 @@ use Mpdf\MpdfException;
 
 final class Writer implements WriterInterface, FromHtmlWriterInterface
 {
-    /** @var resource */
+    /** @var resource|null */
     private $target;
-    /** @var string */
+    /** @var string|null */
+    private $targetPath;
+    /** @var string|null */
     private $source;
-    /** @var Mpdf */
-    private $mpdf;
-
-    public function __construct()
-    {
-        $this->mpdf = new Mpdf();
-    }
 
     /**
      * @param string $html
@@ -37,8 +32,13 @@ final class Writer implements WriterInterface, FromHtmlWriterInterface
      */
     public function setOutputFile($file)
     {
+        // Close any previous handle before opening a new target.
+        $this->closeTarget(false);
+
+        $this->targetPath = $file;
         $this->target = fopen($file, 'wb+');
         if (!$this->target) {
+            $this->targetPath = null;
             throw new InvalidOutputException('Could not open target stream.');
         }
     }
@@ -52,27 +52,59 @@ final class Writer implements WriterInterface, FromHtmlWriterInterface
      */
     public function render(array $options = [])
     {
-        // Set the base path to the root of the site for relative image/asset URLs.
-        // While the docs at  https://mpdf.github.io/reference/mpdf-functions/setbasepath.html don't mention the ability
-        // to provide a server path, like we're doing here, it seems to work most reliably.
-        // Internally mpdf fetches with fopen/file_get_contents, so this works a treat
-        $this->mpdf->SetBasePath(MODX_BASE_PATH);
-
         // Make sure we have a valid objective
         if ($this->source === null) {
+            $this->closeTarget(true);
             throw new MissingSourceException('Source HTML string not provided');
         }
         if (!$this->target) {
             throw new InvalidOutputException('Could not open target stream.');
         }
+
+        // mPDF is not safe to reuse across documents; always create a fresh instance.
+        // Reusing one instance can write the previous document's content under a new filename.
+        $mpdf = new Mpdf();
+
+        // Set the base path to the root of the site for relative image/asset URLs.
+        // While the docs at  https://mpdf.github.io/reference/mpdf-functions/setbasepath.html don't mention the ability
+        // to provide a server path, like we're doing here, it seems to work most reliably.
+        // Internally mpdf fetches with fopen/file_get_contents, so this works a treat
+        $mpdf->SetBasePath(MODX_BASE_PATH);
+
         try {
-            $this->mpdf->WriteHTML($this->source);
-            $binary = $this->mpdf->OutputBinaryData();
+            $mpdf->WriteHTML($this->source);
+            $binary = $mpdf->OutputBinaryData();
+            fwrite($this->target, $binary);
+            $this->closeTarget(false);
+            $this->source = null;
+            return $binary;
         } catch (MpdfException $e) {
+            $this->closeTarget(true);
+            $this->source = null;
             throw new RenderException('Failed generating PDF: ' . $e->getMessage(), $e->getCode(), $e);
+        } catch (\Throwable $e) {
+            $this->closeTarget(true);
+            $this->source = null;
+            throw $e;
         }
-        fwrite($this->target, $binary);
-        fclose($this->target);
-        return $binary;
+    }
+
+    /**
+     * Close the output stream and optionally remove a truncated/incomplete file.
+     *
+     * @param bool $deleteFile
+     * @return void
+     */
+    private function closeTarget($deleteFile)
+    {
+        if (is_resource($this->target)) {
+            fclose($this->target);
+        }
+        $this->target = null;
+
+        if ($deleteFile && $this->targetPath && file_exists($this->targetPath)) {
+            @unlink($this->targetPath);
+        }
+        $this->targetPath = null;
     }
 }

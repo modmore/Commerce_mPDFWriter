@@ -1,3 +1,13 @@
+mPDF Writer for Commerce 1.1.5-pl
+----------------------------------
+Released on 2026-07-28
+
+- Create a fresh mPDF instance for every render() call. Reusing a single Mpdf
+  object across invoices in the same request could write the previous document's
+  content under a new filename (notably during subscription renewals / bulk PDFs).
+- Close the output handle on failure and delete truncated target files so a failed
+  render cannot leave a sticky/incomplete PDF behind.
+
 mPDF Writer for Commerce 1.1.4-pl
 ----------------------------------
 Released on 2022-10-04
