@@ -1,7 +1,8 @@
-<phpunit bootstrap="test/bootstrap.php" backupGlobals="false">
-    <testsuites>
-        <testsuite name="Tests">
-            <directory>test/</directory>
-        </testsuite>
-    </testsuites>
+<?xml version="1.0"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" bootstrap="test/bootstrap.php" backupGlobals="false" colors="true" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
+  <testsuites>
+    <testsuite name="Tests">
+      <directory>./test/</directory>
+    </testsuite>
+  </testsuites>
 </phpunit>

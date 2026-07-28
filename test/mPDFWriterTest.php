@@ -8,15 +8,16 @@ use modmore\Commerce_mPDFWriter\Modules\mPDFWriter;
 use modmore\Commerce_mPDFWriter\Writer;
 use modmore\Commerce\Dispatcher\EventDispatcher;
 
-class mPDFWriterTest extends \PHPUnit_Framework_TestCase
+class mPDFWriterTest extends \Yoast\PHPUnitPolyfills\TestCases\TestCase
 {
     /** @var \Commerce $commerce */
     public $commerce;
     /** @var \modmore\Commerce\Adapter\AdapterInterface $adapter */
     public $adapter;
 
-    public function setUp()
+    protected function setUp(): void
     {
+        parent::setUp();
         global $commerce;
         $this->commerce = $commerce;
         $this->adapter = $this->commerce->adapter;
