@@ -1,3 +1,18 @@
+mPDF Writer for Commerce 1.2.0-pl
+---------------------------------
+Released on 2026-10-06
+
+- Bump minimum PHP to 7.4
+
+Dependencies:
+- php-http/message-factory removed
+- psr/http-message removed (provided by guzzle7 package or modx3 core already)
+- setasign/fpdi updated from v2.3.6 to v2.6.8
+- myclabs/deep-copy updated from 1.11.0 to 1.13.4
+- mpdf/psr-log-aware-trait installed in version v2.0.0
+- mpdf/psr-http-message-shim installed in version v2.0.1
+- mpdf/mpdf updated from v8.1.2 to v8.3.1
+
 mPDF Writer for Commerce 1.1.5-pl
 ----------------------------------
 Released on 2026-07-28
